@@ -16,6 +16,12 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+*.class
+*.jar
+*.war
+.idea/
+*.log
+application-local.yml
 
 ### Eclipse ###
 .apt_generated
