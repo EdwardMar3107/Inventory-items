@@ -1,0 +1,4 @@
+package com.inventory.config;
+
+public class OpenApiConfig {
+}
