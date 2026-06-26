@@ -20,8 +20,15 @@ repositories {
 ext {
     jjwtVersion           = '0.13.0'
     testcontainersVersion = '2.0.5'
-    springdocVersion      = '3.0.3'
+    springdocVersion      = '3.0.1'
     mapstructVersion      = '1.6.3'
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'org.mockito:mockito-core:5.23.0'
+        force 'org.mockito:mockito-junit-jupiter:5.23.0'
+    }
 }
 
 dependencies {
@@ -31,6 +38,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    testImplementation 'org.springframework.boot:spring-boot-restclient'
 
     // PostgreSQL
     runtimeOnly 'org.postgresql:postgresql'
@@ -38,6 +46,7 @@ dependencies {
     // Flyway
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-database-postgresql'
+    implementation 'org.springframework.boot:spring-boot-starter-flyway'
 
     // JWT
     implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
@@ -64,14 +73,14 @@ dependencies {
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
-    testImplementation "org.testcontainers:postgresql:${testcontainersVersion}"
-}
+    testImplementation 'org.springframework.boot:spring-boot-resttestclient'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-jdbc-test'
+    testImplementation 'org.mockito:mockito-core:5.23.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.23.0'
+    testImplementation "org.testcontainers:testcontainers-junit-jupiter:${testcontainersVersion}"
+    testImplementation "org.testcontainers:testcontainers-postgresql:${testcontainersVersion}"
 
-dependencyManagement {
-    imports {
-        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
-    }
 }
 
 tasks.named('bootJar') {
@@ -81,6 +90,9 @@ tasks.named('bootJar') {
 tasks.withType(Test).configureEach {
     useJUnitPlatform()
     jvmArgs '-XX:+EnableDynamicAgentLoading'
+    jvmArgs '-Djdk.attach.allowAttachSelf=true'
+    jvmArgs '--add-opens=java.base/java.lang=ALL-UNNAMED'
+    jvmArgs "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('mockito-core') }}"
 }
 
 tasks.withType(JavaCompile).configureEach {
