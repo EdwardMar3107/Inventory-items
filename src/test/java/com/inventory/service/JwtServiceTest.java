@@ -3,7 +3,6 @@ package com.inventory.service;
 import com.inventory.entity.AppUser;
 import com.inventory.entity.Role;
 import com.inventory.security.JwtService;
-import com.inventory.security.JwtService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
