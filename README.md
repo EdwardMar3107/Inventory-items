@@ -4,20 +4,20 @@ REST CRUD сервис для управления товарными позиц
 
 ## Стек технологий
 
-| Компонент | Версия |
-|---|---|
-| Java | 17 |
-| Spring Boot | 3.3 |
-| Spring Security | 6.x |
-| Spring Data JPA / Hibernate | 6.x |
-| PostgreSQL | 15 |
-| Flyway | 10.x |
+| Компонент | Версия        |
+|---|---------------|
+| Java | 25            |
+| Spring Boot | 4.0.2         |
+| Spring Security | 6.x           |
+| Spring Data JPA / Hibernate | 6.x           |
+| PostgreSQL | 15            |
+| Flyway | 10.x          |
 | OpenAPI / Swagger UI | springdoc 2.5 |
-| JWT | JJWT 0.12.5 |
-| Micrometer / Prometheus | — |
-| MapStruct | 1.5.5 |
-| Gradle | 8.8 |
-| Testcontainers | 1.19 |
+| JWT | JJWT 0.13.0   |
+| Micrometer / Prometheus | —             |
+| MapStruct | 1.6.3         |
+| Gradle | 8.8           |
+| Testcontainers | 2.0.5         |
 
 ---
 
@@ -64,7 +64,7 @@ docker compose down -v   # -v удаляет volume с данными
 
 ### Зависимости
 
-- JDK 17+
+- JDK 25+
 - Gradle 8.8+ (wrapper включён — отдельная установка не нужна)
 - PostgreSQL 15 (или запущенный контейнер)
 
