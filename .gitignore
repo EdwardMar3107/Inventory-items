@@ -6,6 +6,8 @@ build/
 .kotlin
 
 ### IntelliJ IDEA ###
+.idea/
+test-output.txt
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -19,7 +21,6 @@ out/
 *.class
 *.jar
 *.war
-.idea/
 *.log
 application-local.yml
 
